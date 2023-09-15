@@ -1,0 +1,24 @@
+datasource db {
+    provider = "sqlite"
+    url      = "file:./dev.db"
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model Seat {
+    id Int @id @default(autoincrement())
+    userId Int?
+    claimedBy User? @relation(fields: [userId], references: [id])
+    version Int
+
+    @@allow("read", true)
+    @@allow("update", future().version == 1)
+}
+
+model User {
+    id Int @id @default(autoincrement())
+    name String?
+    seat Seat[]
+}
