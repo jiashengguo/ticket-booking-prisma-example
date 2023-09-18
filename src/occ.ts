@@ -30,6 +30,9 @@ async function bookSeat(userId: number) {
         },
         where: {
             id: availableSeat.id,
+            // This version field is the key; only claim seat if in-memory version matches database version,
+            // indicating that the field has not been updated
+            version: availableSeat.version,
         },
     });
 }
