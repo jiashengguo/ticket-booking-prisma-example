@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 const client = new PrismaClient();
 
 async function bookSeat(userId: number) {
-    // sleep randomly between 10ms and 100 ms
+    // Stimulate random booking time within 10s
     await new Promise((resolve) => setTimeout(resolve, Math.random() * 10000));
     // Find the first available seat
     // availableSeat.version might be 0
